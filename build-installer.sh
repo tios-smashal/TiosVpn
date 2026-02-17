@@ -154,89 +154,10 @@ cat > "$BUILD_DIR/distribution.xml" << EOF
 EOF
 
 # Create welcome page
-cat > "$RESOURCES_DIR/welcome.html" << HTMLEOF
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 20px; }
-        h1 { color: #007AFF; }
-        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    $LOGO_TAG
-    <h1>Welcome to TiosVPN</h1>
-    <p>This installer will install TiosVPN on your Mac.</p>
-    <h3>What is TiosVPN?</h3>
-    <p>TiosVPN is an easy-to-use VPN client for connecting to your company's VPN with MFA support.</p>
-    <h3>Before You Begin:</h3>
-    <p><strong>OpenVPN Required:</strong> Make sure you have OpenVPN installed.</p>
-    <p>If not installed, run this command in Terminal:</p>
-    <pre>brew install openvpn</pre>
-    <h3>What Will Be Installed:</h3>
-    <ul>
-        <li>TiosVPN.app in your Applications folder</li>
-        <li>Command-line tool: <code>tiosvpn</code> (optional)</li>
-    </ul>
-    <p>Click Continue to proceed with the installation.</p>
-</body>
-</html>
-HTMLEOF
+cat "$SCRIPT_DIR/installer-welcome.html" | sed "s|LOGO_PLACEHOLDER|$LOGO_TAG|g" > "$RESOURCES_DIR/welcome.html"
 
 # Create conclusion page
-cat > "$RESOURCES_DIR/conclusion.html" << HTMLEOF
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 20px; }
-        h1 { color: #34C759; }
-        .next-steps { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0; }
-        pre { background: #e8e8e8; padding: 10px; border-radius: 5px; font-size: 12px; }
-    </style>
-</head>
-<body>
-    $LOGO_TAG
-    <h1>✓ Installation Complete!</h1>
-    <p>TiosVPN has been successfully installed.</p>
-    <div class="next-steps">
-        <h3>Next Steps:</h3>
-        <ol>
-            <li><strong>Verify OpenVPN is installed:</strong>
-                <pre>brew install openvpn</pre>
-            </li>
-            <li><strong>Launch TiosVPN:</strong>
-                <ul>
-                    <li>Open from Applications folder, or</li>
-                    <li>Use Spotlight (⌘ + Space) and type "TiosVPN"</li>
-                </ul>
-            </li>
-            <li><strong>First-time setup:</strong>
-                <ul>
-                    <li>Enter your VPN username and password</li>
-                    <li>Credentials are securely stored in macOS Keychain</li>
-                </ul>
-            </li>
-            <li><strong>Connect:</strong>
-                <ul>
-                    <li>Enter your 6-digit MFA code</li>
-                    <li>Click Connect</li>
-                </ul>
-            </li>
-        </ol>
-    </div>
-    <h3>Command-Line Usage (Optional):</h3>
-    <pre>tiosvpn setup       # Configure credentials
-tiosvpn connect     # Connect to VPN
-tiosvpn disconnect  # Disconnect
-tiosvpn status      # Check status</pre>
-    <p><strong>Need Help?</strong> Contact your IT department.</p>
-</body>
-</html>
-HTMLEOF
+cat "$SCRIPT_DIR/installer-conclusion.html" | sed "s|LOGO_PLACEHOLDER|$LOGO_TAG|g" > "$RESOURCES_DIR/conclusion.html"
 
 # Build final product package
 echo "Building final installer package..."

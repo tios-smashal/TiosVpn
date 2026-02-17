@@ -1,0 +1,56 @@
+# TiosVPN Project - Git Ignore File
+
+# Build artifacts
+build/
+*.pkg
+TiosVPN-*.pkg
+
+# Generated icon files
+TiosVPN.iconset/
+TiosVPN.icns
+installer-resources/
+
+# macOS system files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Backup files
+*-old.sh
+*-backup.sh
+*.bak
+*~
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Company logo (uncomment if logo is sensitive)
+# TiosVpn.png
+
+# Test/Debug files
+test-*.sh
+debug-*.log
+*.log
+
+# Distribution packages (if you want to exclude them)
+TiosVPN-Distribution/
+TiosVPN-Distribution.zip
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Credentials and secrets (just in case)
+auth.txt
+*.ovpn.local
+credentials.txt
+
+# Legacy/deprecated files
+build-pkg.sh
+build-pkg-with-images.sh
+TiosVPN-GUI-old.sh
