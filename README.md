@@ -118,7 +118,6 @@ tiosvpn help
 
 - macOS 10.13 or later
 - Homebrew (recommended - for automatic OpenVPN installation)
-- Sudo access (for VPN connection)
 
 **Note:** The `.pkg` installer automatically installs OpenVPN if Homebrew is present. If not, users will be prompted to install Homebrew first.
 
@@ -461,7 +460,7 @@ sudo chmod +x /usr/local/bin/tiosvpn /usr/local/bin/vpn-manager.sh
 - ✅ Temporary auth files deleted after use
 - ✅ MFA required for each connection
 - ✅ No credentials in plain text files
-- ✅ Sudo required for VPN connection
+- ✅ Secure VPN connection via OpenVPN
 
 ## FAQ
 
