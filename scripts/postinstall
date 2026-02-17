@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Post-installation script for TiosVPN
+#
+
+echo "Running TiosVPN post-installation..."
+
+# Set correct permissions
+chmod +x /Applications/TiosVPN.app/Contents/MacOS/TiosVPN
+chmod +x /Applications/TiosVPN.app/Contents/Resources/TiosVPN-GUI.sh
+chmod +x /Applications/TiosVPN.app/Contents/Resources/vpn-manager.sh
+
+# Install CLI tool if requested
+if [ -f "/Applications/TiosVPN.app/Contents/Resources/tiosvpn" ]; then
+    cp /Applications/TiosVPN.app/Contents/Resources/tiosvpn /usr/local/bin/tiosvpn 2>/dev/null || true
+    cp /Applications/TiosVPN.app/Contents/Resources/vpn-manager.sh /usr/local/bin/vpn-manager.sh 2>/dev/null || true
+    chmod +x /usr/local/bin/tiosvpn /usr/local/bin/vpn-manager.sh 2>/dev/null || true
+fi
+
+echo "TiosVPN installation complete!"
+
+exit 0

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>TiosVPN</title>
+    <organization>com.tios</organization>
+    <domains enable_localSystem="true"/>
+    <options customize="never" require-scripts="false" hostArchitectures="x86_64,arm64"/>
+
+    <welcome file="welcome.html"/>
+    <conclusion file="conclusion.html"/>
+
+    <pkg-ref id="com.tios.vpn">
+        <bundle-version>
+            <bundle id="com.tios.vpn"/>
+        </bundle-version>
+    </pkg-ref>
+
+    <options customize="never" require-scripts="true"/>
+
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.tios.vpn"/>
+        </line>
+    </choices-outline>
+
+    <choice id="default"/>
+
+    <choice id="com.tios.vpn" visible="false">
+        <pkg-ref id="com.tios.vpn"/>
+    </choice>
+
+    <pkg-ref id="com.tios.vpn" version="1.0" onConclusion="none">TiosVPN-component.pkg</pkg-ref>
+</installer-gui-script>
