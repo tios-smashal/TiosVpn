@@ -36,39 +36,42 @@ A simple macOS application to connect to your company VPN with MFA support.
 
 ### For IT Admins (Building Installer Package)
 
-Build a professional `.pkg` installer for easy distribution:
+Build a professional `.pkg` installer for easy distribution with **one simple command**:
 
-#### Quick Start (No Customization)
-
-```bash
-# Build basic installer package
-./build-pkg.sh
-```
-
-This creates `TiosVPN-1.0.pkg` ready to distribute.
-
-#### With Custom Branding (Recommended)
-
-Add your company logo to make it professional:
+#### Recommended: Build with Your Company Logo
 
 ```bash
-# 1. Add your logo (PNG, 1024x1024px recommended)
-./create-icon.sh your-company-logo.png
-
-# 2. Add logo to installer screens
-./add-installer-images.sh your-company-logo.png
-
-# 3. Build the package with branding
-./build-pkg-with-images.sh
+# 1. Place your logo in the directory (rename to TiosVpn.png)
+# 2. Build the installer
+./build-installer.sh
 ```
 
-This creates a branded `TiosVPN-1.0.pkg` with:
-- Your company logo as the app icon
-- Logo displayed in installer welcome/completion screens
+**That's it!** The script automatically:
+- ✅ Detects `TiosVpn.png` in the current directory
+- ✅ Creates app icon from your logo
+- ✅ Adds logo to installer welcome/completion screens
+- ✅ Builds the complete `TiosVPN-1.0.pkg` package
 
-#### Manual Installation (Development)
+**Logo Requirements:**
+- File name: `TiosVpn.png` (must be in current directory)
+- Format: PNG (transparent background recommended)
+- Recommended size: 1024x1024 pixels
+- Will be automatically resized for all uses
 
-For testing without building a package:
+#### Without Custom Branding
+
+If you don't have a logo or want a basic version:
+
+```bash
+# Just build without TiosVpn.png in directory
+./build-installer.sh
+```
+
+This creates a basic `TiosVPN-1.0.pkg` without custom branding.
+
+#### Manual Installation (Development/Testing)
+
+For local testing without building a package:
 
 ```bash
 ./install.sh
@@ -157,39 +160,52 @@ chmod +x TiosVPN.app/Contents/MacOS/TiosVPN
 
 ### For IT Admins: Creating the Installer
 
-#### Step 1: Customize with Your Branding (Optional but Recommended)
+#### Step 1: Add Your Company Logo (Recommended)
+
+Place your company logo in the project directory:
 
 ```bash
-# Place your company logo in the directory (PNG format, 1024x1024px recommended)
-# For example: company-logo.png or TiosVpn.png
-
-# Create app icon from your logo
-./create-icon.sh TiosVpn.png
-
-# Add logo to installer welcome/completion screens
-./add-installer-images.sh TiosVpn.png
+# Your logo must be named: TiosVpn.png
+# - Format: PNG (transparent background recommended)
+# - Size: 1024x1024px recommended (will auto-resize)
+# - Location: Same directory as build-installer.sh
 ```
 
 #### Step 2: Build the Installer Package
 
 ```bash
-# If you added custom images:
-./build-pkg-with-images.sh
-
-# OR if no custom images:
-./build-pkg.sh
+# Single command builds everything automatically
+./build-installer.sh
 ```
 
-This creates **TiosVPN-1.0.pkg** - a professional macOS installer package.
+This command automatically:
+1. Detects if `TiosVpn.png` exists
+2. Creates app icon and installer images from it
+3. Builds **TiosVPN-1.0.pkg** - a professional macOS installer
+
+Output:
+```
+✓ Found TiosVpn.png - adding branding...
+✓ App icon created
+✓ Installer logo prepared
+✓ Package built successfully
+
+Installer package: TiosVPN-1.0.pkg
+Branding: ✓ Custom logo included
+```
 
 #### Step 3: Test the Installer
 
 ```bash
-# Test the installer before distributing
+# Test before distributing to employees
 open TiosVPN-1.0.pkg
 ```
 
-Go through the installation wizard to verify everything works correctly.
+Verify:
+- ✅ Your logo appears in welcome screen
+- ✅ Your logo appears in completion screen
+- ✅ App has custom icon after installation
+- ✅ Installation completes successfully
 
 #### Step 4: Distribute to Employees
 
@@ -274,45 +290,52 @@ Send these simple instructions to employees:
 
 ### Adding Custom Branding
 
-Make TiosVPN look professional with your company branding:
+Make TiosVPN look professional with your company branding - **it's automatic!**
 
-#### 1. App Icon
+#### Simple Automatic Branding
 
-Add a custom icon that appears in Applications, Dock, and Spotlight:
-
-```bash
-./create-icon.sh path/to/logo.png
-```
-
-**Image Requirements:**
-- Format: PNG, JPG, or any image format
-- Recommended size: 1024x1024 pixels (will be auto-resized)
-- Shape: Square
-- Can have transparent or solid background
-
-#### 2. Installer Images
-
-Add your logo to the installer welcome and completion screens:
+Just place your logo in the directory and build:
 
 ```bash
-./add-installer-images.sh path/to/logo.png
+# 1. Add your logo (must be named TiosVpn.png)
+cp /path/to/your-logo.png TiosVpn.png
+
+# 2. Build (automatically uses TiosVpn.png)
+./build-installer.sh
 ```
 
-**Image Requirements:**
-- Format: PNG (transparent background recommended) or JPG
-- Recommended size: 200-400px wide
-- Any aspect ratio (square or horizontal works best)
+The script automatically:
+- ✅ Creates app icon for Applications, Dock, Spotlight
+- ✅ Adds logo to installer welcome screen
+- ✅ Adds logo to installer completion screen
+- ✅ Builds complete branded package
 
-#### 3. Complete Branding Example
+**Logo Requirements:**
+- **File name:** Must be `TiosVpn.png` in the project directory
+- **Format:** PNG (transparent background recommended)
+- **Size:** 1024x1024 pixels recommended (auto-resized as needed)
+- **Shape:** Square works best
+
+#### Updating Your Logo
+
+To change the logo later:
 
 ```bash
-# If you have your logo as company-logo.png
-./create-icon.sh company-logo.png
-./add-installer-images.sh company-logo.png
-./build-pkg-with-images.sh
+# 1. Replace the logo file
+cp /path/to/new-logo.png TiosVpn.png
+
+# 2. Rebuild
+./build-installer.sh
 ```
 
-See `ADD-IMAGES.md` for detailed instructions and examples.
+#### Building Without Branding
+
+Remove or don't include `TiosVpn.png`, then build:
+
+```bash
+# Builds without custom branding if TiosVpn.png doesn't exist
+./build-installer.sh
+```
 
 ### Updating VPN Configuration
 
@@ -334,34 +357,42 @@ Then rebuild the package.
 ```
 tiosvpn/
 ├── TiosVPN-1.0.pkg              # Installer package (distribute this!)
+├── TiosVpn.png                  # Your company logo (add this for branding!)
+│
 ├── TiosVPN.app/                 # macOS application bundle
 │   └── Contents/
 │       ├── MacOS/TiosVPN        # App launcher script
 │       ├── Resources/
 │       │   ├── TiosVPN-GUI.sh   # GUI interface (AppleScript)
 │       │   ├── vpn-manager.sh   # Core VPN logic
-│       │   └── TiosVPN.icns     # App icon (if customized)
+│       │   └── TiosVPN.icns     # App icon (generated from TiosVpn.png)
 │       └── Info.plist           # App metadata
 │
-├── Scripts/
+├── Core Scripts/
 │   ├── vpn-manager.sh           # Core VPN management functions
 │   ├── TiosVPN-GUI.sh           # GUI interface (AppleScript)
 │   └── tiosvpn                  # CLI tool
 │
 ├── Build Scripts/
-│   ├── build-pkg.sh             # Build basic installer
-│   ├── build-pkg-with-images.sh # Build installer with custom images
-│   ├── install.sh               # Manual installation script
-│   ├── create-icon.sh           # Create app icon from image
-│   └── add-installer-images.sh  # Add images to installer
+│   ├── build-installer.sh       # ⭐ Main build script (use this!)
+│   ├── build-pkg.sh             # Basic build (legacy)
+│   ├── build-pkg-with-images.sh # Build with images (legacy)
+│   ├── install.sh               # Manual installation
+│   ├── create-icon.sh           # Icon helper (called by build-installer.sh)
+│   └── add-installer-images.sh  # Image helper (called by build-installer.sh)
 │
 ├── Documentation/
 │   ├── README.md                # This file
-│   └── ADD-IMAGES.md            # Custom branding guide
+│   └── ADD-IMAGES.md            # Detailed branding guide
 │
 └── scripts/
     └── postinstall              # Post-installation script
 ```
+
+**Key Files:**
+- `TiosVpn.png` - Add your logo here (1024x1024px recommended)
+- `build-installer.sh` - Run this to build the installer
+- `TiosVPN-1.0.pkg` - Final installer to distribute
 
 ## Advanced Configuration
 
@@ -458,7 +489,7 @@ rm -rf ~/Library/Application\ Support/TiosVPN
 ```
 
 **Q: Can I customize the app icon?**
-A: Yes! See "Customization Options" section above or read `ADD-IMAGES.md`
+A: Yes! Just place your logo as `TiosVpn.png` in the directory and run `./build-installer.sh`
 
 **Q: How do I change the VPN server?**
 A: Edit `CONFIG_URL` in `vpn-manager.sh` and rebuild the package
