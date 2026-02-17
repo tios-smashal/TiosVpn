@@ -160,6 +160,51 @@ Make sure the app is executable:
 chmod +x TiosVPN.app/Contents/MacOS/TiosVPN
 ```
 
+## Uninstallation
+
+To completely remove TiosVPN from your system:
+
+### Quick Uninstall (Recommended)
+
+```bash
+# Download or locate uninstall.sh, then run:
+./uninstall.sh
+```
+
+The uninstaller will:
+- ✅ Disconnect active VPN connection
+- ✅ Remove TiosVPN.app from Applications
+- ✅ Remove CLI tools
+- ✅ Delete credentials from Keychain
+- ✅ Remove all configuration files
+
+### Manual Uninstall
+
+If you prefer to remove manually:
+
+```bash
+# 1. Disconnect VPN
+sudo pkill -f "openvpn.*client-config.ovpn"
+
+# 2. Remove application
+rm -rf /Applications/TiosVPN.app
+
+# 3. Remove CLI tools
+sudo rm /usr/local/bin/tiosvpn /usr/local/bin/vpn-manager.sh
+
+# 4. Remove credentials
+security delete-generic-password -s TiosVPN -a vpn-username
+security delete-generic-password -s TiosVPN -a vpn-password
+
+# 5. Remove configuration
+rm -rf ~/Library/Application\ Support/TiosVPN
+```
+
+**Note:** OpenVPN is not removed. To remove it separately:
+```bash
+brew uninstall openvpn
+```
+
 ## Building and Distribution
 
 ### For IT Admins: Creating the Installer
@@ -480,19 +525,23 @@ A: Open TiosVPN → Settings → Update Credentials
 A: Yes! Run `tiosvpn connect`
 
 **Q: How do I uninstall?**
-A:
+A: Use the uninstaller script:
 ```bash
-# Remove app
+# Easy way (recommended)
+./uninstall.sh
+
+# Or manual removal:
+# 1. Remove app
 rm -rf /Applications/TiosVPN.app
 
-# Remove CLI tool
+# 2. Remove CLI tools
 sudo rm /usr/local/bin/tiosvpn /usr/local/bin/vpn-manager.sh
 
-# Remove credentials
+# 3. Remove credentials
 security delete-generic-password -s TiosVPN -a vpn-username
 security delete-generic-password -s TiosVPN -a vpn-password
 
-# Remove configuration
+# 4. Remove configuration
 rm -rf ~/Library/Application\ Support/TiosVPN
 ```
 
