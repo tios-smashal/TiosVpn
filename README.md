@@ -16,23 +16,24 @@ A simple macOS application to connect to your company VPN with MFA support.
 
 ### For Employees (Simple Installation)
 
-1. **Install OpenVPN** (one-time):
-   ```bash
-   brew install openvpn
-   ```
+1. **Download and install TiosVPN**:
+   - Double-click `TiosVPN-1.0.pkg`
+   - Click "Continue" and follow the installer
+   - OpenVPN will be installed automatically (if Homebrew is available)
 
-2. **Copy TiosVPN.app** to your Applications folder:
-   - Drag `TiosVPN.app` to `/Applications/`
+2. **Launch TiosVPN**:
+   - Open from Applications folder, or
+   - Press ⌘+Space and type "TiosVPN"
 
-3. **First Launch**:
-   - Double-click `TiosVPN.app`
-   - Enter your VPN username and password (one-time setup)
-   - Credentials are securely stored in macOS Keychain
+3. **First-time setup**:
+   - Enter your VPN username and password
+   - Click "Save Credentials" (stored securely in macOS Keychain)
 
 4. **Connect to VPN**:
-   - Double-click `TiosVPN.app`
    - Enter your 6-digit MFA code
    - Click "Connect"
+
+**That's it!** The installer handles everything automatically.
 
 ### For IT Admins (Building Installer Package)
 
@@ -116,8 +117,10 @@ tiosvpn help
 ## Requirements
 
 - macOS 10.13 or later
-- OpenVPN installed via Homebrew: `brew install openvpn`
-- Sudo access (for OpenVPN connection)
+- Homebrew (recommended - for automatic OpenVPN installation)
+- Sudo access (for VPN connection)
+
+**Note:** The `.pkg` installer automatically installs OpenVPN if Homebrew is present. If not, users will be prompted to install Homebrew first.
 
 ## How It Works
 
@@ -136,10 +139,12 @@ tiosvpn help
 ## Troubleshooting
 
 ### "Command not found: openvpn"
-Install OpenVPN:
-```bash
-brew install openvpn
-```
+The installer should have installed OpenVPN automatically. If you see this error:
+
+1. Check if Homebrew is installed: `brew --version`
+2. If not, install Homebrew from: https://brew.sh
+3. Then install OpenVPN: `brew install openvpn`
+4. Restart TiosVPN
 
 ### "Authentication failed"
 - Check your username/password in Settings
@@ -272,19 +277,20 @@ Now distribute `TiosVPN-Distribution.zip` to your employees.
 Send these simple instructions to employees:
 
 ```
-1. Install OpenVPN:
-   brew install openvpn
+1. Double-click TiosVPN-1.0.pkg
 
-2. Download and double-click TiosVPN-1.0.pkg
+2. Follow the installation wizard (OpenVPN installs automatically)
 
-3. Follow the installation wizard
+3. Launch TiosVPN from Applications (or ⌘+Space → "TiosVPN")
 
-4. Launch TiosVPN from Applications
+4. Enter your credentials (one-time setup)
 
-5. Enter your credentials (one-time setup)
+5. Enter MFA code and connect
 
-6. Enter MFA code and connect
+Done!
 ```
+
+**Note:** If the employee doesn't have Homebrew, they'll see a message to install it first. Most Macs already have Homebrew installed.
 
 ## Customization Options
 
@@ -460,7 +466,10 @@ sudo chmod +x /usr/local/bin/tiosvpn /usr/local/bin/vpn-manager.sh
 ## FAQ
 
 **Q: Do I need to install Python or other dependencies?**
-A: No! Everything uses built-in macOS tools.
+A: No! Everything uses built-in macOS tools. OpenVPN is installed automatically by the `.pkg` installer.
+
+**Q: Do I need to install OpenVPN manually?**
+A: No! The installer automatically installs OpenVPN if you have Homebrew. If not, you'll be prompted to install Homebrew first (one-time setup).
 
 **Q: Can I use this without the GUI?**
 A: Yes! Use the CLI tool: `tiosvpn connect`
